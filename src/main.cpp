@@ -1,9 +1,7 @@
 #include <Arduino.h>
 
 void setup() {
-pavel=10
-sup
-suup
+ //setup
 }
 
 void loop() {
