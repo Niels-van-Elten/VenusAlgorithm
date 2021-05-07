@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 void setup() {
- //setup hiii
+  // put your setup code here, to run once:
 }
 
 void loop() {
