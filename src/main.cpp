@@ -3,6 +3,7 @@
 void setup() {
 pavel=10
 sup
+suup
 }
 
 void loop() {
