@@ -7,4 +7,3 @@ pavel=10
 void loop() {
   // put your main code here, to run repeatedly:
 }
-Pavel is cools
