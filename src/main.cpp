@@ -5,6 +5,7 @@
  */
 // Declarations //
 
+#include <Arduino.h>
 #include <Servo.h>                           // Include servo library
   
 Servo servoLeft;                             // Declare left servo signal
