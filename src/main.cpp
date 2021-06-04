@@ -24,6 +24,7 @@ int IRL = 0;        // value read from the receiver
 int incomingByte;
 long duration; // variable for the duration of sound wave travel
 int USH; // variable for the distance measurement
+int SSS = 0; //determines if robot is standing still
    
    // Pulse widths 
    
@@ -107,8 +108,8 @@ void setup()                                 // Built in initialization block
   pinMode(trigPin, OUTPUT);                  // Sets the trigPin as an OUTPUT
   pinMode(echoPin, INPUT);                   // Sets the echoPin as an INPUT
   Serial.begin(9600);
-  Serial.println("Ultrasonic Sensor HC-SR04 Test"); // print some text in Serial Monitor
-  Serial.println("with Arduino UNO R3");
+  //Serial.println("Ultrasonic Sensor HC-SR04 Test"); // print some text in Serial Monitor
+  //Serial.println("with Arduino UNO R3");
   // start with standing still // 
 
   stand_still();
@@ -121,18 +122,18 @@ void loop(){                                  // Main loop auto-repeats
   IRL = analogRead(analogInPin);
 
   // print the results to the serial monitor:
-  Serial.print("\nsensor = ");
-  Serial.print(IRL);
+  //Serial.print("\nsensor = ");
+  //Serial.print(IRL);
   //the threshold found fron analog In Out program was when object is detected, the sensor value is below 100
   //set the threshold whihc you get
   //the threshold varies for different sets of emitter-receiver pairs
   if(IRL < 100){ //checks if object is there or not
     digitalWrite(13, HIGH);
-    Serial.print("\nObject Detected");
+    //Serial.print("\nObject Detected");
   }
   else{
     digitalWrite(13, LOW);
-    Serial.print("\nNo object in Front");
+    //Serial.print("\nNo object in Front");
   }
 
   delay(10);
@@ -159,10 +160,10 @@ void loop(){                                  // Main loop auto-repeats
   // convert the time into a distance
   USM = microsecondsToCentimeters(duration);
 
-  Serial.print("Distance middle sensor:");
-  Serial.print(USM);
+  //Serial.print("Distance middle sensor:");
+  //Serial.print(USM);
 
-  Serial.println();
+  //Serial.println();
 
   delay(10);
 
@@ -178,39 +179,39 @@ void loop(){                                  // Main loop auto-repeats
   // Calculating the distance
   USH = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
   // Displays the distance on the Serial Monitor
-  Serial.print("Distance upper sensor: ");
+  //Serial.print("Distance upper sensor: ");
   //upper sensor code is the same has bottom sensor code 
-  Serial.print(USH);
-  Serial.println(" cm");
+  //Serial.print(USH);
+  //Serial.println(" cm");
   delay(10);
 
   //Mountain evasion
-
-  srand(time(0));                       // Creates new rand seed
-  
  
   if(USH<=10){                          // Turns to the right by random amount
-    turn_right(rand() % 180+90);
+    srand(millis());
+    turn_right(rand() % 2140 + 1070);
+    SSS=0;
 
   }
   
   /*
   else if(IRL<=10){                     // Turns to the right by random amount
-    turn_right(rand() % 180+90);
+    srand(millis());
+    turn_right(rand() % 2140 + 1070);
 
   }
 
   else if(IRR<=10){                     // Turns to the right by random amount
-    turn_right(rand() % 180+90);
+    srand(millis());
+    turn_right(rand() % 2140 + 1070);
 
   }
   */
 
-  else{
+  else if(SSS==0){
     stand_still();
+    SSS=1;
 
   }
-
-  delay(30);
 
 }
