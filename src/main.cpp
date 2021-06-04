@@ -20,18 +20,18 @@ Servo servoRight;                            // Declare right servo signal
 Servo servoGripper;   
 
 const int analogInPin = A0;  // Analog input pin that the receiver is attached to
-int sensorValue = 0;        // value read from the receiver
+int IRL = 0;        // value read from the receiver
 int incomingByte;
 long duration; // variable for the duration of sound wave travel
 int USH; // variable for the distance measurement
    
    // Pulse widths 
    
-   int LF = 1520;            // Left forward
-   int LB = 1360;            // Left backward
-   int RF = 1300;            // Right forward
-   int RB = 1620;            // Right backward
-   int S = 1460;            // Stand still
+   int LB = 1100;            // Left forward
+   int LF = 1900;            // Left backward
+   int RF = 1100;            // Right forward
+   int RB = 1900;            // Right backward
+   int S = 1500;            // Stand still
 
 // Declarations end//
 
@@ -86,6 +86,13 @@ void close_gripper(){
   servoGripper.write(120);
 }
 
+long microsecondsToCentimeters(long microseconds) {
+  // The speed of sound is 340 m/s or 29 microseconds per centimeter.
+  // The ping travels out and back, so to find the distance of the object we  
+  // take half of the distance travelled.
+  return microseconds / 28.65 / 2;
+}
+
 //Functions end//
 
 void setup()                                 // Built in initialization block
@@ -128,7 +135,7 @@ void loop(){                                  // Main loop auto-repeats
     Serial.print("\nNo object in Front");
   }
 
-  delay(200);
+  delay(10);
 
   //Ultrasound code
 
@@ -157,7 +164,7 @@ void loop(){                                  // Main loop auto-repeats
 
   Serial.println();
 
-  delay(30);
+  delay(10);
 
   // Clears the trigPin condition
   digitalWrite(trigPin, LOW);
@@ -175,33 +182,35 @@ void loop(){                                  // Main loop auto-repeats
   //upper sensor code is the same has bottom sensor code 
   Serial.print(USH);
   Serial.println(" cm");
-  delay(600);
-  
-  long microsecondsToCentimeters(long microseconds) {
-  // The speed of sound is 340 m/s or 29 microseconds per centimeter.
-  // The ping travels out and back, so to find the distance of the object we  
-  // take half of the distance travelled.
-  return microseconds / 28.65 / 2;
+  delay(10);
 
   //Mountain evasion
 
-  srand(time(0));                             // Creates new rand seed
+  srand(time(0));                       // Creates new rand seed
   
-  if(USH>=100){                         // Turns to the right by random amount
-    turn_right(rand()/10000000);
+ 
+  if(USH<=10){                          // Turns to the right by random amount
+    turn_right(rand() % 180+90);
 
   }
-
-  if(IRL>=100){                         // Turns to the right by random amount
-    turn_right(rand()/10000000);
-
-  }
-
+  
   /*
-  if(IRR>=100){                         // Turns to the right by random amount
-    turn_right(rand()/10000000);
+  else if(IRL<=10){                     // Turns to the right by random amount
+    turn_right(rand() % 180+90);
+
+  }
+
+  else if(IRR<=10){                     // Turns to the right by random amount
+    turn_right(rand() % 180+90);
 
   }
   */
+
+  else{
+    stand_still();
+
+  }
+
+  delay(30);
 
 }
