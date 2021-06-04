@@ -104,7 +104,11 @@ void setup()                                 // Built in initialization block
   servoLeft.attach(13);                      // Attach left signal to P13 
   servoRight.attach(12);                     // Attach right signal to P12   
   servoGripper.attach(10);
-  pinMode(13, OUTPUT);                       //initialize the indicator LED:
+
+  pinMode(IRR, INPUT);
+  pinMode(IRFR, INPUT);
+  pinMode(IRLF, INPUT);
+  pinMode(IRL, INPUT);
   pinMode(trigPin, OUTPUT);                  // Sets the trigPin as an OUTPUT
   pinMode(echoPin, INPUT);                   // Sets the echoPin as an INPUT
   Serial.begin(9600);
@@ -136,8 +140,6 @@ void loop(){                                  // Main loop auto-repeats
     //Serial.print("\nNo object in Front");
   }
 
-  delay(10);
-
   //Ultrasound code
 
   long duration, USM;
@@ -165,8 +167,6 @@ void loop(){                                  // Main loop auto-repeats
 
   //Serial.println();
 
-  delay(10);
-
   // Clears the trigPin condition
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
@@ -183,7 +183,6 @@ void loop(){                                  // Main loop auto-repeats
   //upper sensor code is the same has bottom sensor code 
   //Serial.print(USH);
   //Serial.println(" cm");
-  delay(10);
 
   //Mountain evasion
  
