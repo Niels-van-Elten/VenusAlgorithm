@@ -194,7 +194,6 @@ void loop(){                                  // Main loop auto-repeats
 
   }
   
-  /*
   else if(IRL<=10){                     // Turns to the right by random amount
     srand(millis());
     turn_right(rand() % 2140 + 1070);
@@ -206,12 +205,10 @@ void loop(){                                  // Main loop auto-repeats
     turn_right(rand() % 2140 + 1070);
 
   }
-  */
 
   else if(SSS==0){
     stand_still();
     SSS=1;
 
   }
-
 }
