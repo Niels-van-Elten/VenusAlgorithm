@@ -19,8 +19,11 @@ Servo servoLeft;                             // Declare left servo signal
 Servo servoRight;                            // Declare right servo signal
 Servo servoGripper;   
 
-const int analogInPin = A0;  // Analog input pin that the receiver is attached to
-int IRL = 0;        // value read from the receiver
+int IRR = A1;
+int IRFR = A2;
+int IRLF = A3;
+int IRL = A4;
+int val = 0;
 int incomingByte;
 long duration; // variable for the duration of sound wave travel
 int USH; // variable for the distance measurement
@@ -121,24 +124,30 @@ void setup()                                 // Built in initialization block
 }  
  
 void loop(){                                  // Main loop auto-repeats
-  //Infrared sensor code
-  // read the analog in value:
-  IRL = analogRead(analogInPin);
+  /*Infrared sensor code
+  val = analogRead(IRR);
+  //Serial.print("Value IR Right: ");
+  //Serial.println(val); 
+  //delay(25);
 
-  // print the results to the serial monitor:
-  //Serial.print("\nsensor = ");
-  //Serial.print(IRL);
-  //the threshold found fron analog In Out program was when object is detected, the sensor value is below 100
-  //set the threshold whihc you get
-  //the threshold varies for different sets of emitter-receiver pairs
-  if(IRL < 100){ //checks if object is there or not
-    digitalWrite(13, HIGH);
-    //Serial.print("\nObject Detected");
-  }
-  else{
-    digitalWrite(13, LOW);
-    //Serial.print("\nNo object in Front");
-  }
+  val = analogRead(IRFR);
+  //Serial.print("Value IR Right Front: ");
+  //Serial.println(val); 
+  //delay(25);
+
+  val = analogRead(IRLF);
+  //Serial.print("Value IR Left Front: ");
+  //Serial.println(val); 
+  //delay(25);
+
+  val = analogRead(IRL);
+  //Serial.print("Value IR Left: ");
+  //Serial.println(val); 
+  //delay(25);
+
+  //Serial.println("-------------------------------------------------");
+  //delay(1000);
+  */
 
   //Ultrasound code
 
@@ -192,7 +201,8 @@ void loop(){                                  // Main loop auto-repeats
     SSS=0;
 
   }
-  
+
+  /*
   else if(IRL<=10){                     // Turns to the right by random amount
     srand(millis());
     turn_right(rand() % 2140 + 1070);
@@ -204,6 +214,7 @@ void loop(){                                  // Main loop auto-repeats
     turn_right(rand() % 2140 + 1070);
 
   }
+  */
 
   else if(SSS==0){
     stand_still();
