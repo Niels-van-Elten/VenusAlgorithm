@@ -188,10 +188,10 @@ void loop(){                                  // Main loop auto-repeats
   // Calculating the distance
   USH = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
   // Displays the distance on the Serial Monitor
-  //Serial.print("Distance upper sensor: ");
-  //upper sensor code is the same has bottom sensor code 
-  //Serial.print(USH);
-  //Serial.println(" cm");
+  // Serial.print("Distance upper sensor: ");
+  // upper sensor code is the same has bottom sensor code 
+  // Serial.print(USH);
+  // Serial.println(" cm");
 
   //Mountain evasion
  
@@ -202,19 +202,17 @@ void loop(){                                  // Main loop auto-repeats
 
   }
 
-  /*
-  else if(IRL<=10){                     // Turns to the right by random amount
+  else if(IRL<500){                     // Turns to the right by random amount
     srand(millis());
     turn_right(rand() % 2140 + 1070);
 
   }
 
-  else if(IRR<=10){                     // Turns to the right by random amount
+  else if(IRR<500){                     // Turns to the right by random amount
     srand(millis());
     turn_right(rand() % 2140 + 1070);
 
   }
-  */
 
   else if(SSS==0){
     stand_still();
